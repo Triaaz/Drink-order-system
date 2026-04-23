@@ -51,6 +51,16 @@ If I refactor this later, I’ll use objects instead.
 
 ---
 
+## Thinking vs Implementation gap
+
+I understood most of the logic in my head while building this, but translating that into clean and structured code took time.
+
+The main issue was not the concepts, but organizing the logic clearly while writing it out.
+
+Over time, I improved by breaking problems into smaller steps before coding instead of trying to write everything at once.
+
+---
+
 ## How to run
 
 npm install  
