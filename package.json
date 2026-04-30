@@ -1,7 +1,7 @@
 {
   "name": "projects-with-emily",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple Node.js terminal app for taking drink orders and calculating totals.",
   "main": "Project-1.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,15 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "express": "^5.2.1",
     "prompt-sync": "^4.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Triaaz/Drink-order-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Triaaz/Drink-order-system/issues"
+  },
+  "homepage": "https://github.com/Triaaz/Drink-order-system#readme"
 }
