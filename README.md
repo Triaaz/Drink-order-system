@@ -1,74 +1,71 @@
-# Drink Order System (CLI)
+Drink Order System (Express Backend)
+Simple Node.js + Express API for handling drink orders. This is an upgrade from a CLI-based system into a backend server using HTTP requests.
 
-Simple Node.js terminal app for taking drink orders and calculating totals.
+What I built
+This project was originally a CLI drink ordering system, now converted into an Express API.
 
----
 
-## What I built
+Current features:
+View drink menu
+Place orders via API request
+Store orders in server memory (no database yet)
+Retrieve all orders
 
-Menu shows drinks with prices. User picks drink + quantity, system stores order and prints a final bill.
 
-Nothing complex — just arrays, loops, and basic validation.
+API Endpoints
+Get menu
+GET /menu
+Returns available drinks and prices.
 
----
+Place order
+POST /order
 
-## What broke / what I struggled with
+Body (JSON):
+{  "name": "John",  "drink": "boba",  "quantity": 2}
 
-### 1. Duplicate orders
-Same drink was getting added multiple times instead of updating.
+Response:
+Confirms order placement
+Stores order in memory
 
-I first didn’t think about checking existing items.
 
-Fix was using:
-- `.find()` to detect existing drink
-- then increase quantity instead of pushing again
+Get all orders
+GET /orders
+Returns all stored orders.
 
----
+What changed from CLI version
+1. Input system
+Old: terminal prompts (prompt-sync)
+New: HTTP requests (Express + JSON)
 
-### 2. Totals logic was messy
-At first I was storing `total` inside each order and updating it every time.
 
-Problem: it becomes unreliable if price logic changes.
+2. Execution model
+Old: runs once and exits
+New: runs continuously as a server handling requests
 
-So I stopped storing totals and calculated everything at the end instead.
 
----
+3. Data handling
+Old: immediate processing inside loop
+New: orders stored in memory and retrieved via endpoints
 
-### 3. Input validation was weak
-User could enter nonsense (letters for quantity, negatives, etc).
 
-I fixed it by forcing:
-- `Number()`
-- checking `isNaN`
-- blocking <= 0 values
 
----
+Current limitation
+No database yet
+Data resets when server restarts
+No authentication or user persistence
 
-### 4. Two arrays for menu (drinks + prices)
-This works but it’s fragile because index must match.
 
-If I refactor this later, I’ll use objects instead.
+How to run
+npm installnode server.js
+Server runs at:
+http://localhost:3000
 
----
+What I learned from this transition
+The main shift was moving from synchronous terminal-based logic to a request/response backend model using Express. The focus is now on handling data flow through routes instead of direct user input.
 
-## Thinking vs Implementation gap
+Next improvements (planned)
+Add database (MongoDB)
+Improve order structure per user
+Add receipt endpoint
+Refactor into modular routes/controllers structure
 
-I understood most of the logic in my head while building this, but translating that into clean and structured code took time.
-
-The main issue was not the concepts, but organizing the logic clearly while writing it out.
-
-Over time, I improved by breaking problems into smaller steps before coding instead of trying to write everything at once.
-
----
-
-## How to run
-
-npm install  
-node orderSystem.js
-
----
-
-## What I’d improve next
-- Use object-based menu instead of two arrays
-- Add better CLI UI (clearer prompts, spacing)
-- Possibly convert to Express API later
