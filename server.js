@@ -19,12 +19,13 @@ app.get("/menu", (req, res) => {
 
 app.post("/order", (req, res) => {
   const { name, drink, quantity } = req.body;
+  const drinkLower = drink.toLowerCase()
 
   if (!name) {
     return res.status(400).json({ error: "Name is required" });
   }
 
-  if (!menu[drink]) {
+  if (!(drinkLower in menu)) {
     return res.status(400).json({ error: "Drink not available" });
   }
 
@@ -38,20 +39,24 @@ app.post("/order", (req, res) => {
   }
 
   // check if drink already exists for user
-  let existing = orders[name].find(item => item.drink === drink);
+  let existing = orders[name].find(item => item.drink === drinkLower);
 
   if (existing) {
     existing.quantity += quantity;
   } else {
-    orders[name].push({ drink, quantity });
+    orders[name].push({ drink: drinkLower, quantity });
   }
 
   res.json({
     message: "Order placed",
-    userOrders: orders[name]
+    userOrders: orders[name],
+    total
   });
 });
 
 app.get("/orders", (req, res) => {
   res.json(orders);
+  let total = orders[name].reduce((sum, item) => {
+    return sum + (menu[item.drink] * item.quantity);
+  }, 0);
 });
